@@ -69,8 +69,9 @@ def buscar_faltantes(archivo): # Busca palabras faltantes en el diccionario y cr
 def mostrar_resultado(inexistentes):
     c = len(inexistentes)
     if len(inexistentes) == 0: print("\nTodas las palabras están en el diccionario.")
-    else : print(f"\nEl texto contiene {c} {'palabras' if c > 1 else 'palabra'} que no {'están' if c> 1 else 'está'} en el diccionario\n")        
-    
+    else : print(f"\nEl texto contiene {c} {'palabras' if c > 1 else 'palabra'} que no {'están' if c> 1 else 'está'} en el diccionario\n") 
+    for i in inexistentes:
+        print(i)
 
 def agregar_diccionario():
     #with open('spanish.lst', 'a' )
@@ -98,6 +99,10 @@ else:
         mostrar_resultado(inexistentes)
         
     
+
+
+
+
 
 
 
