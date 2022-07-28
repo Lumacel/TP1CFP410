@@ -64,13 +64,13 @@ def buscar_faltantes(archivo): # Busca palabras faltantes en el diccionario y cr
                     inexistentes.append(palabra)       
     return inexistentes 
 
-def mostrar_resultado(inexistentes): 
+def mostrar_resultado(inexistentes):
     c = len(inexistentes)
     if len(inexistentes) == 0: print("\nTodas las palabras están en el diccionario.")
     else : print(f"\nEl texto contiene {c} {'palabras' if c > 1 else 'palabra'} que no {'están' if c> 1 else 'está'} en el diccionario.") 
     input('\nPresione *ENTER*')
 
-def menu_inexistentes(inexistentes,arch): # menú para decidir sobre que hacer con las palabras que no están en el archivo 
+def menu_inexistentes(inexistentes,arch_2): # guarda en el diccionarios las palabras inexistentes o las corrige (segùn la opción elejida)
     nuevas=[]
     opciones=('1','2','3')
     for palabra in inexistentes:
@@ -85,8 +85,12 @@ def menu_inexistentes(inexistentes,arch): # menú para decidir sobre que hacer c
                 diccionario.write('\n' + palabra)
         elif opc == '2':
             nueva_palabra = input('\nEscriba nuevamente la palabra: ')
-            arch = arch.replace(palabra,nueva_palabra)
-    return arch
+            for i in arch_2:
+                if i == palabra:
+                    indice = arch_2.index(i)
+                    arch_2[indice]= nueva_palabra
+
+    return arch_2
 
 ############## PROGRAMA PRINCIPAL ####################
  
@@ -98,10 +102,9 @@ if n == 1:
     inexistentes = buscar_faltantes(arch_2)
     if len(inexistentes)!=0:
         mostrar_resultado(inexistentes)
-        archivo_final = menu_inexistentes(inexistentes,arch)
-
+        archivo_final = menu_inexistentes(inexistentes,arch_2)
     print('\n', archivo_final)
-    print('Todas las palabras están en el diccionario.')
+    print('\nTodas las palabras están en el diccionario.')
     input()
   
 else:
@@ -111,9 +114,12 @@ else:
         inexistentes = buscar_faltantes(arch_2)
         if len(inexistentes)>0:
             mostrar_resultado(inexistentes)
-            archivo_final = menu_inexistentes(inexistentes,arch)
+            archivo_final = menu_inexistentes(inexistentes,arch_2)
     print('\n', archivo_final)
-    print('Todas las palabras están en el diccionario.')
+    print('\nTodas las palabras están en el diccionario.')
     input()
+            
+            
+    
             
      
